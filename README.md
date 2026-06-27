@@ -66,7 +66,6 @@ sudo install -v ./mininet/mnexec /usr/local/bin/
 ```
 ### Run
 ```bash
-# project start
 # terminal 1
 sudo systemctl start openvswitch-switch                       # enable ovs as background service 
 .venv/bin/python3 src/main.py	                              # start the controller app
@@ -102,6 +101,7 @@ Open `http://localhost:8080/` for the GUI.
 ### Uninstall
 ```bash
 # stopping the project
+
 # terminal 1
 Ctrl+C                                    # to stop the (foreground) process of the server (and the mininet on the other terminal)
 deactivate                                # exit from the python virtual environment
