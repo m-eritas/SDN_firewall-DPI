@@ -49,12 +49,13 @@ python3 tests/test_rest_api.py
 Sends 5 malicious payloads + 1 clean payload over TCP. Run the listener on h2 first, then the sender on h1:
 
 ```
-mininet> xterm h1 h2
+mininet>
+xterm h1 h2
 
-# In h2's xterm:
+h2 xterm>
 python3 tests/test_tcp_listener.py 9000
 
-# In h1's xterm:
+h1 xterm>
 python3 tests/test_dpi_payloads.py
 ```
 
@@ -65,9 +66,10 @@ Check the GUI event log for `DPI blocked [PATTERN_NAME]` entries. The last paylo
 Sends packets with suspicious TCP flag combinations (XMAS, NULL, SYN+FIN, SYN+RST, FIN, and a legitimate SYN):
 
 ```
-mininet> xterm h1
+mininet>
+xterm h1
 
-# In h1's xterm:
+h1 xterm>
 python3 tests/test_tcp_scans.py
 ```
 
@@ -78,10 +80,12 @@ Check the GUI for scan detection events. The last packet (SYN only) should not t
 Sends a forged ARP reply from h3 claiming h1's IP. Must establish a legitimate ARP binding first:
 
 ```
-mininet> h1 ping -c 1 h2
-mininet> xterm h3
+mininet>
+h1 ping -c 1 h2
+mininet>
+xterm h3
 
-# In h3's xterm:
+h3 xterm>
 python3 tests/test_arp_spoof.py
 ```
 
@@ -92,12 +96,13 @@ Check the GUI for `ARP spoof: 10.0.0.1` and verify the drop flow with `sh ovs-of
 Sends 10 messages on a persistent TCP connection to exceed TRUST_K=5:
 
 ```
-mininet> xterm h1 h2
+mininet>
+xterm h1 h2
 
-# In h2's xterm:
+h2 xterm>
 python3 tests/test_tcp_listener.py 8080
 
-# In h1's xterm:
+h1 xterm>
 python3 tests/test_trust_flow.py
 ```
 
@@ -108,5 +113,6 @@ Verify the priority-400 trust flows: `mininet> sh ovs-ofctl dump-flows s1`.
 Helper script used by the DPI and trust tests. Run on h2 to accept and display incoming connections:
 
 ```bash
-python3 tests/test_tcp_listener.py [port]    # default: 9000
+python3 tests/test_tcp_listener.py [port]
+# default: 9000
 ```
