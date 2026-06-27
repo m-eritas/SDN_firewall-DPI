@@ -61,7 +61,7 @@ python3.12 -m venv .venv
 source ./.venv/bin/activate
  ./.venv/bin/python3 -m pip install ./ryu/
  ./.venv/bin/python3 -m pip install ./mininet/
-make ./mininet/mnexec
+make -C ./vendor/mininet/ mnexec
 sudo install -v ./vendor/mininet/mnexec /usr/local/bin/
 
 # project start
