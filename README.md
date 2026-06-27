@@ -45,8 +45,8 @@ sudo apt update
 sudo apt install -y git xterm python3-pip python3.12 python3.12-venv python3.12-dev python3-pip openvswitch-switch
 
 # project istallation
-git clone https://github.com/GioeleSe/SDN_firewall/
-cd SDN_firewall
+git clone https://github.com/m-eritas/SDN_firewall-DPI
+cd SDN_firewall-DPI
 
 # local libraries (from patched source)
 source ./.venv/bin/activate
@@ -93,7 +93,7 @@ deactivate                       # exit from the python virtual environment
 sudo systemctl stop openvswitch-switch    # stop the background service
 
 # uninstalling the project:	
-cd .. && sudo rm -rf SDN_firewall
+cd .. && sudo rm -rf SDN_firewall-DPI
 ```
 
 ---
