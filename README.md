@@ -27,11 +27,19 @@ src/                          <- project source code
    dpi_engine.py              <- standalone regex-based payload matcher
    gui/
       firewall_gui.html       <- single-page dashboard
-vendor/                       <- patched third-party forks (not project code)
-   ryu/                       <- Ryu controller (patched for Python 3.12)
-   mininet/                   <- Mininet (patched for Python 3.12)
-docs/                         <- testing guide, notes
-   testing_guide.md
+ryu/                          <- Ryu controller (patched for Python 3.12)
+mininet/                      <- Mininet (patched for Python 3.12)
+extras/
+   tests/                         
+      testing_guide.md        <- testing guide, notes
+      restart.sh              <- clean restart (mn -c, kill controller, relaunch)
+      test_rest_api.py        <- REST API validation (31 assertions, no Mininet needed)
+      test_dpi_payloads.py    <- DPI signature sender (run on h1)
+      test_tcp_scans.py       <- TCP flag scan sender (run on h1)
+      test_arp_spoof.py       <- ARP spoof sender (run on h3)
+      test_trust_flow.py      <- trust flow generator (run on h1)
+      test_tcp_listener.py    <- reusable TCP listener (run on h2)
+      
 README.md
 LICENSE
 .gitignore
@@ -49,6 +57,7 @@ git clone https://github.com/m-eritas/SDN_firewall-DPI
 cd SDN_firewall-DPI
 
 # local libraries (from patched source)
+python3.12 -m venv .venv
 source ./.venv/bin/activate
  ./.venv/bin/python3 -m pip install ./ryu/
  ./.venv/bin/python3 -m pip install ./mininet/
