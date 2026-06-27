@@ -30,7 +30,6 @@ src/                          <- project source code
 vendor/                       <- patched third-party forks (not project code)
    ryu/                       <- Ryu controller (patched for Python 3.12)
    mininet/                   <- Mininet (patched for Python 3.12)
-
 docs/                         <- testing guide, notes
    testing_guide.md
 README.md
@@ -51,14 +50,14 @@ cd SDN_firewall
 
 # local libraries (from patched source)
 source ./.venv/bin/activate
- ./.venv/bin/python3 -m pip install ./ryu/
- ./.venv/bin/python3 -m pip install ./mininet/
+ ./.venv/bin/python3 -m pip install ./vendor/ryu/
+ ./.venv/bin/python3 -m pip install ./vendor/mininet/
 make ./mininet/mnexec
-sudo install -v ./mininet/mnexec /usr/local/bin/
+sudo install -v ./vendor/mininet/mnexec /usr/local/bin/
 
 # project start
 sudo systemctl start openvswitch-switch # enable ovs as background service 
-.venv/bin/python3 main.py	# on one terminal start the controller app
+.venv/bin/python3 src/main.py	# on one terminal start the controller app
 sudo ./.venv/bin/mn --controller remote --mac --topo single,3 # on the other terminal start mininet
 ```
 Open `http://localhost:8080/` for the GUI.
