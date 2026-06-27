@@ -45,7 +45,7 @@ LICENSE
 .gitignore
 ```
 
-### Install & Run
+### Install
 ```bash
 # global libraries
 sudo add-apt-repository ppa:deadsnakes/ppa -y
@@ -63,12 +63,17 @@ source ./.venv/bin/activate
  ./.venv/bin/python3 -m pip install ./mininet/
 make -C ./mininet/ mnexec
 sudo install -v ./mininet/mnexec /usr/local/bin/
-
-# project start
-sudo systemctl start openvswitch-switch # enable ovs as background service 
-.venv/bin/python3 src/main.py	# on one terminal start the controller app
-sudo ./.venv/bin/mn --controller remote --mac --topo single,3 # on the other terminal start mininet
 ```
+### Run
+```bash
+# project start
+# terminal 1
+sudo systemctl start openvswitch-switch                       # enable ovs as background service 
+.venv/bin/python3 src/main.py	                              # start the controller app
+# terminal 2
+sudo ./.venv/bin/mn --controller remote --mac --topo single,3 # start mininet
+```
+
 Open `http://localhost:8080/` for the GUI.
 
 ## REST API
@@ -97,9 +102,14 @@ Open `http://localhost:8080/` for the GUI.
 ### Uninstall
 ```bash
 # stopping the project
-Ctrl+C                            # to stop the (foreground) process of the server (and the mininet on the other terminal)
-deactivate                       # exit from the python virtual environment
+# terminal 1
+Ctrl+C                                    # to stop the (foreground) process of the server (and the mininet on the other terminal)
+deactivate                                # exit from the python virtual environment
 sudo systemctl stop openvswitch-switch    # stop the background service
+
+# terminal 2
+mininet> exit                             # exiting the mininet
+sudo mn -c                                # cleanup of mininet (optional, but may resolve some issues)
 
 # uninstalling the project:	
 cd .. && sudo rm -rf SDN_firewall-DPI
