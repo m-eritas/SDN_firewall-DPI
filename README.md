@@ -52,7 +52,7 @@ sudo add-apt-repository ppa:deadsnakes/ppa -y
 sudo apt update
 sudo apt install -y git xterm python3-pip python3.12 python3.12-venv python3.12-dev python3-pip openvswitch-switch
 
-# project istallation
+# project installation
 git clone https://github.com/m-eritas/SDN_firewall-DPI
 cd SDN_firewall-DPI
 
@@ -61,8 +61,8 @@ python3.12 -m venv .venv
 source ./.venv/bin/activate
  ./.venv/bin/python3 -m pip install ./ryu/
  ./.venv/bin/python3 -m pip install ./mininet/
-make -C ./vendor/mininet/ mnexec
-sudo install -v ./vendor/mininet/mnexec /usr/local/bin/
+make -C ./mininet/ mnexec
+sudo install -v ./mininet/mnexec /usr/local/bin/
 
 # project start
 sudo systemctl start openvswitch-switch # enable ovs as background service 
