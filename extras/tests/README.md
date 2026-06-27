@@ -31,7 +31,7 @@ Recommended order:
 Kills controller/mininet, runs `sudo mn -c`, restarts the controller:
 
 ```bash
-bash tests/restart.sh
+bash extras/tests/restart.sh
 ```
 
 Then start mininet manually in a second terminal (the script prints the command).
