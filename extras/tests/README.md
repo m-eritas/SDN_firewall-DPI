@@ -41,7 +41,7 @@ Then start mininet manually in a second terminal (the script prints the command)
 Tests all endpoints, input validation, and edge cases. Run from any terminal:
 
 ```bash
-python3 tests/test_rest_api.py
+python3 extras/tests/test_rest_api.py
 ```
 
 ### test_dpi_payloads.py -> DPI signature detection
@@ -53,10 +53,10 @@ mininet>
 xterm h1 h2
 
 h2 xterm>
-python3 tests/test_tcp_listener.py 9000
+python3 extras/tests/test_tcp_listener.py 9000
 
 h1 xterm>
-python3 tests/test_dpi_payloads.py
+python3 extras/tests/test_dpi_payloads.py
 ```
 
 Check the GUI event log for `DPI blocked [PATTERN_NAME]` entries. The last payload (CLEAN) should NOT trigger a block.
@@ -70,7 +70,7 @@ mininet>
 xterm h1
 
 h1 xterm>
-python3 tests/test_tcp_scans.py
+python3 extras/tests/test_tcp_scans.py
 ```
 
 Check the GUI for scan detection events. The last packet (SYN only) should not trigger a warning.
@@ -86,7 +86,7 @@ mininet>
 xterm h3
 
 h3 xterm>
-python3 tests/test_arp_spoof.py
+python3 extras/tests/test_arp_spoof.py
 ```
 
 Check the GUI for `ARP spoof: 10.0.0.1` and verify the drop flow with `sh ovs-ofctl dump-flows s1`.
@@ -100,10 +100,10 @@ mininet>
 xterm h1 h2
 
 h2 xterm>
-python3 tests/test_tcp_listener.py 8080
+python3 extras/tests/test_tcp_listener.py 8080
 
 h1 xterm>
-python3 tests/test_trust_flow.py
+python3 extras/tests/test_trust_flow.py
 ```
 
 Verify the priority-400 trust flows: `mininet> sh ovs-ofctl dump-flows s1`.
@@ -113,6 +113,6 @@ Verify the priority-400 trust flows: `mininet> sh ovs-ofctl dump-flows s1`.
 Helper script used by the DPI and trust tests. Run on h2 to accept and display incoming connections:
 
 ```bash
-python3 tests/test_tcp_listener.py [port]
+python3 extras/tests/test_tcp_listener.py [port]
 # default: 9000
 ```
