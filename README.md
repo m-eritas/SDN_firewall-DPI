@@ -50,8 +50,8 @@ cd SDN_firewall-DPI
 
 # local libraries (from patched source)
 source ./.venv/bin/activate
- ./.venv/bin/python3 -m pip install ./vendor/ryu/
- ./.venv/bin/python3 -m pip install ./vendor/mininet/
+ ./.venv/bin/python3 -m pip install ./ryu/
+ ./.venv/bin/python3 -m pip install ./mininet/
 make ./mininet/mnexec
 sudo install -v ./vendor/mininet/mnexec /usr/local/bin/
 
