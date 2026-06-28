@@ -3,7 +3,10 @@ Basic SDN Firewall implemented with Ryu and tested with Mininet. Local-only web 
 
 
 ## Installation & Usage
-> Tested on Acer with i5-10210U, 16GB RAM, 512GB SSD - Ubuntu 24.04.3 LTS (and Linux Mint 22.2), kernel 6.17.0-14-generic
+Tested on:
+> Acer with i5-10210U, 16GB RAM, 512GB SSD - Ubuntu 24.04.3 LTS (and Linux Mint 22.2), kernel 6.17.0-14-generic\
+> MSI with i7-10750H, 16GB RAM, 1.5 TB SSD - Ubuntu 24.04.4 LTS (installed on USB flash drive), kernel 6.17.0-23-generic
+   
 
 ## Features
 
