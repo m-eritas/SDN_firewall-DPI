@@ -15,7 +15,7 @@ DPI tests must run before trust tests on the same host pair. Once trust is insta
 Recommended order:
 
 1. `test_rest_api.py` (no Mininet needed)
-2. `bash tests/restart.sh` + start mininet
+2. `bash tests/restart.sh`
 3. `test_tcp_scans.py`
 4. Restart
 5. `test_arp_spoof.py`
@@ -28,9 +28,10 @@ Recommended order:
 
 ### restart.sh -> Clean restart
 
-Kills controller/mininet, runs `sudo mn -c`, restarts the controller:
+Kills controller/mininet, runs `sudo mn -c`, restarts the controller and the mininet:
 
 ```bash
+#CTRL+C in controller terminnal then:
 bash extras/tests/restart.sh
 ```
 
