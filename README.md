@@ -66,9 +66,12 @@ sudo install -v ./mininet/mnexec /usr/local/bin/
 ```
 ### Run
 ```bash
+# starting the project
+
 # terminal 1 (controller)
 sudo systemctl start openvswitch-switch                       # enable ovs as background service 
 .venv/bin/python3 src/main.py	                              # start the controller app
+
 # terminal 2 (mininet)
 sudo ./.venv/bin/mn --controller remote --mac --topo single,3 # start mininet
 ```
