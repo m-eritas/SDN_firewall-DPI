@@ -39,7 +39,6 @@ PAYLOADS = [
      b'GET /index.html HTTP/1.0\r\nHost: example.com\r\n\r\n'),
 ]
 
-
 def send_payload(name, data):
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -53,7 +52,6 @@ def send_payload(name, data):
     except Exception as e:
         print(f'  [{name}] FAILED -- {e}')
 
-
 def main():
     print(f'DPI payload sender -> {TARGET}:{PORT}')
     print(f'Sending {len(PAYLOADS)} payloads with 1s delay between each.\n')
@@ -65,7 +63,6 @@ def main():
         time.sleep(1)
 
     print('\nDone. Verify results in the GUI event log and stats.')
-
 
 if __name__ == '__main__':
     main()

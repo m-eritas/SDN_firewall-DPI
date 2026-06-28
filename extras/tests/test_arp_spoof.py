@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 test_arp_spoof.py -- Send a forged ARP reply to test spoof detection.
-Run on h3 via xterm (requires root -- Mininet xterms run as root).
+Run on h3 via xterm (requires root, but Mininet xterms run as root).
 
     # First, establish legitimate ARP binding:
     mininet> h1 ping -c 1 h2
@@ -26,10 +26,8 @@ TARGET_IP = '10.0.0.2'
 TARGET_MAC = '00:00:00:00:00:02'
 IFACE = 'h3-eth0'
 
-
 def mac_to_bytes(mac_str):
     return bytes(int(b, 16) for b in mac_str.split(':'))
-
 
 def send_with_scapy():
     from scapy.all import ARP, Ether, sendp
@@ -42,7 +40,6 @@ def send_with_scapy():
     )
     sendp(pkt, iface=IFACE, verbose=False)
     print(f'[scapy] Spoofed ARP sent: {SPOOFED_IP} -> MAC {SPOOFER_MAC}')
-
 
 def send_with_raw_socket():
     """Fallback if scapy is not installed."""
@@ -62,7 +59,6 @@ def send_with_raw_socket():
     s.close()
     print(f'[raw] Spoofed ARP sent: {SPOOFED_IP} -> MAC {SPOOFER_MAC}')
 
-
 def main():
     print(f'ARP spoof test: claiming {SPOOFED_IP} with MAC {SPOOFER_MAC}')
     print(f'IMPORTANT: run "h1 ping -c 1 h2" first to establish legitimate binding.\n')
@@ -80,7 +76,6 @@ def main():
     print('\nCheck the GUI for "ARP spoof: 10.0.0.1" in the event log.')
     print('Check flows: mininet> sh ovs-ofctl dump-flows s1')
     print('Expected: priority=200 drop flow for arp,arp_spa=10.0.0.1')
-
 
 if __name__ == '__main__':
     main()

@@ -116,3 +116,5 @@ Helper script used by the DPI and trust tests. Run on h2 to accept and display i
 python3 extras/tests/test_tcp_listener.py [port]
 # default: 9000
 ```
+---
+*The tests were developed with the help of Claude - AI agent of Anthropic as the final stage of summarizing all of the tests already done in the past. Agent was used to compile the various tests done throughout the development into 7 clean scripts for the ease of checking the functionality of the firewall. The code was then double-checked and confirmed, but the overall syntax and style remains heavily inspired by the stylistics of the agent at hand.

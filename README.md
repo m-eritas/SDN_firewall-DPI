@@ -3,19 +3,19 @@ Basic SDN Firewall implemented with Ryu and tested with Mininet. Local-only web 
 
 
 ## Installation & Usage
-> Tested on Acer with i5-10210U, 16GB RAM, 512GB SSD — Ubuntu 24.04.3 LTS (and Linux Mint 22.2), kernel 6.17.0-14-generic
+> Tested on Acer with i5-10210U, 16GB RAM, 512GB SSD - Ubuntu 24.04.3 LTS (and Linux Mint 22.2), kernel 6.17.0-14-generic
 
 ## Features
 
-- **IP blocking** — block traffic by source IP, with input validation
-- **Port blocking** — block TCP/UDP by port number and protocol
-- **Rate limiting** — configurable packet-per-window threshold per source IP; exceeded sources get a temporary hardware drop rule
-- **ARP spoof detection** — learns legitimate IP→MAC bindings and drops forged ARP replies
-- **TCP scan detection** — identifies XMAS, NULL, SYN+FIN, SYN+RST, and bare FIN scans via flag inspection
-- **Deep packet inspection** — regex-based payload matching on TCP streams with 6 built-in signatures (SQL injection, shellcode NOP sled, XSS, path traversal, command injection, FTP cleartext credentials) and support for user-defined patterns via REST
-- **Trust flow installation** — after K clean packets on a 5-tuple, installs a priority-400 hardware forwarding rule so trusted traffic bypasses the controller. Adding a new DPI pattern flushes all trust flows for re-inspection
-- **Web GUI** — dark-themed dashboard with live WebSocket event log, stat counters, and controls for all rule types
-- **REST API** — full CRUD for IPs, ports, rate limits, and DPI patterns
+- **IP blocking** - block traffic by source IP, with input validation
+- **Port blocking** - block TCP/UDP by port number and protocol
+- **Rate limiting** - configurable packet-per-window threshold per source IP; exceeded sources get a temporary hardware drop rule
+- **ARP spoof detection** - learns legitimate IP→MAC bindings and drops forged ARP replies
+- **TCP scan detection** - identifies XMAS, NULL, SYN+FIN, SYN+RST, and bare FIN scans via flag inspection
+- **Deep packet inspection** - regex-based payload matching on TCP streams with 6 built-in signatures (SQL injection, shellcode NOP sled, XSS, path traversal, command injection, FTP cleartext credentials) and support for user-defined patterns via REST
+- **Trust flow installation** - after K clean packets on a 5-tuple, installs a priority-400 hardware forwarding rule so trusted traffic bypasses the controller. Adding a new DPI pattern flushes all trust flows for re-inspection
+- **Web GUI** - dark-themed dashboard with live WebSocket event log, stat counters, and controls for all rule types
+- **REST API** - full CRUD for IPs, ports, rate limits, and DPI patterns
 
 ## Project structure
 
@@ -117,11 +117,11 @@ cd .. && sudo rm -rf SDN_firewall-DPI
 
 ---
 *The development was done cooperating with Claude - AI agent of Anthropic.
-The agent decision was taken after seeing the company's stance against the massive use of AI for what's somehow called security but has been correctly defined as mass surveillance. I believe that the company's courage in questioning the military use of AI in the most controversial areas should be recognized, despite the other company's  implications. The CEO's statement is available at https://www.anthropic.com/news/statement-department-of-war*
-> There was no vibe-coding behind it but a slow and steady reading of papers and docs to understand the logic of libraries and protocols involved. <br>
+The agent decision was taken after seeing the company's stance against the massive use of AI for what's somehow called security, but has been correctly defined as mass surveillance. We believe that the company's courage in questioning the military use of AI in the most controversial areas should be recognized, despite the other company's implications. The CEO's statement is available at https://www.anthropic.com/news/statement-department-of-war*
+> There was no vibe-coding behind the project but a slow and steady reading of papers and docs to understand the logic of libraries and protocols involved. <br>
 > The agent has been used to produce a first GUI schema and, in general, for the most lengthy sections. <br>
-> The entire code has been (and will be) checked and revised. <br>
-> No gray area o spaghetti code will be left (and if so, it will be caused only by our code skill-issue problem)
+> The entire code has been checked and revised. <br>
+> No gray area or spaghetti code was left (and if so, it was caused only by our code skill-issue problem)
 
 ## License
 

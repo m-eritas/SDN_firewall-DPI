@@ -23,7 +23,6 @@ import time
 TARGET = sys.argv[1] if len(sys.argv) > 1 else '10.0.0.2'
 PORT = int(sys.argv[2]) if len(sys.argv) > 2 else 8080
 
-
 def main():
     print(f'Trust flow test -> {TARGET}:{PORT}')
     print(f'Sending 10 messages on a persistent connection (TRUST_K=5).\n')
@@ -53,7 +52,6 @@ def main():
     print(f'  mininet> sh ovs-ofctl dump-flows s1')
     print(f'  (look for priority=400 matching proto=6, src_port={local_port})')
     print(f'\nGUI: "Trust Flows" stat should be >= 1.')
-
 
 if __name__ == '__main__':
     main()

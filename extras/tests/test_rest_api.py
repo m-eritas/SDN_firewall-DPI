@@ -17,7 +17,6 @@ BASE = 'http://localhost:8080'
 passed = 0
 failed = 0
 
-
 def req(method, path, body=None):
     """Send an HTTP request and return (status_code, parsed_json_or_None)."""
     url = BASE + path
@@ -33,7 +32,6 @@ def req(method, path, body=None):
         except Exception:
             return e.code, None
 
-
 def check(name, condition, detail=''):
     global passed, failed
     if condition:
@@ -42,7 +40,6 @@ def check(name, condition, detail=''):
     else:
         failed += 1
         print(f'  FAIL  {name}  -- {detail}')
-
 
 def test_ip_blocking():
     print('\n-- IP Blocking --')
@@ -72,7 +69,6 @@ def test_ip_blocking():
     code, data = req('DELETE', '/firewall/rules/ip/garbage')
     check('Delete invalid IP returns 400', code == 400)
 
-
 def test_port_blocking():
     print('\n-- Port Blocking --')
 
@@ -99,7 +95,6 @@ def test_port_blocking():
     code, _ = req('DELETE', '/firewall/rules/port/80/6')
     check('Delete port returns 200 (even if already removed)', code == 200)
 
-
 def test_rate_limit():
     print('\n-- Rate Limiting --')
 
@@ -111,7 +106,6 @@ def test_rate_limit():
 
     req('POST', '/firewall/rules/ratelimit', {'limit': 1000, 'window': 1})
 
-
 def test_dpi_patterns():
     print('\n-- DPI Patterns --')
 
@@ -119,37 +113,25 @@ def test_dpi_patterns():
     check('GET /dpi returns 200', code == 200)
     check('Has 6 built-in patterns', isinstance(data, list) and len([p for p in data if p.get('builtin')]) == 6)
 
-    code, data = req('POST', '/firewall/dpi', {
-        'name': 'TEST_PATTERN', 'pattern': 'test_[a-z]+', 'description': 'test'
-    })
+    code, data = req('POST', '/firewall/dpi', {'name': 'TEST_PATTERN', 'pattern': 'test_[a-z]+', 'description': 'test'})
     check('Add user pattern returns 200', code == 200)
     check('Response has pattern name', data.get('pattern') == 'TEST_PATTERN')
 
-    code, data = req('POST', '/firewall/dpi', {
-        'name': 'TEST_PATTERN', 'pattern': 'xyz', 'description': ''
-    })
+    code, data = req('POST', '/firewall/dpi', {'name': 'TEST_PATTERN', 'pattern': 'xyz', 'description': ''})
     check('Duplicate name returns 400', code == 400)
     check('Error mentions exists', 'exists' in data.get('msg', ''))
 
-    code, data = req('POST', '/firewall/dpi', {
-        'name': 'EMPTY', 'pattern': '', 'description': ''
-    })
+    code, data = req('POST', '/firewall/dpi', {'name': 'EMPTY', 'pattern': '', 'description': ''})
     check('Empty pattern returns 400', code == 400)
 
-    code, data = req('POST', '/firewall/dpi', {
-        'name': '', 'pattern': 'abc', 'description': ''
-    })
+    code, data = req('POST', '/firewall/dpi', {'name': '', 'pattern': 'abc', 'description': ''})
     check('Empty name returns 400', code == 400)
 
-    code, data = req('POST', '/firewall/dpi', {
-        'name': 'BAD_REGEX', 'pattern': '(a+)+', 'description': 'backtrack bomb'
-    })
+    code, data = req('POST', '/firewall/dpi', {'name': 'BAD_REGEX', 'pattern': '(a+)+', 'description': 'backtrack bomb'})
     check('Dangerous regex returns 400', code == 400)
     check('Error mentions backtracking', 'backtrack' in data.get('msg', '').lower())
 
-    code, data = req('POST', '/firewall/dpi', {
-        'name': 'BAD_SYNTAX', 'pattern': '[unclosed', 'description': ''
-    })
+    code, data = req('POST', '/firewall/dpi', {'name': 'BAD_SYNTAX', 'pattern': '[unclosed', 'description': ''})
     check('Invalid regex returns 400', code == 400)
 
     code, data = req('DELETE', '/firewall/dpi/TEST_PATTERN')
@@ -161,7 +143,6 @@ def test_dpi_patterns():
     code, data = req('DELETE', '/firewall/dpi/SQL_INJECTION')
     check('Delete built-in returns 403', code == 403)
     check('Error mentions built-in', 'built-in' in data.get('msg', ''))
-
 
 def test_stats_and_log():
     print('\n-- Stats & Log --')
@@ -176,7 +157,6 @@ def test_stats_and_log():
     check('GET /log returns 200', code == 200)
     check('Log is a list', isinstance(data, list))
 
-
 def test_rules_endpoint():
     print('\n-- Rules Endpoint --')
 
@@ -186,7 +166,6 @@ def test_rules_endpoint():
     check('Has blocked_ports', 'blocked_ports' in data)
     check('Has rate_limit', 'rate_limit' in data)
     check('Has rate_window', 'rate_window' in data)
-
 
 def main():
     try:
@@ -207,7 +186,6 @@ def main():
     print(f'  {passed} passed, {failed} failed')
     print(f'{"=" * 40}')
     sys.exit(1 if failed else 0)
-
 
 if __name__ == '__main__':
     main()

@@ -35,7 +35,6 @@ SCANS = [
     ('SYN only (legitimate)', SYN,              False),
 ]
 
-
 def send_tcp_flags(flags_byte):
     s = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.IPPROTO_TCP)
     s.setsockopt(socket.IPPROTO_IP, socket.IP_HDRINCL, 1)
@@ -49,7 +48,6 @@ def send_tcp_flags(flags_byte):
 
     s.sendto(ip_header + tcp_header, (DST_IP, 0))
     s.close()
-
 
 def main():
     print(f'TCP scan test -> {DST_IP}:{DST_PORT}')
@@ -69,7 +67,6 @@ def main():
 
     print('\nDone. Check the GUI event log for scan detection messages.')
     print('The last packet (SYN only) should NOT appear as a scan.')
-
 
 if __name__ == '__main__':
     main()

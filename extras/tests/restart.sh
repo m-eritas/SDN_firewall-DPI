@@ -5,12 +5,11 @@
 # Usage:
 #     bash tests/restart.sh
 #
-# This kills any running controller/mininet processes, cleans up
-# OVS and mininet state, then starts both fresh.
+# This kills any running controller/mininet processes, cleans up OVS and mininet state, then starts both fresh.
 
 set -e
 
-SCRIPT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "$0")/../../.." && pwd)"
 cd "$SCRIPT_DIR"
 
 echo "[restart] Stopping mininet..."
