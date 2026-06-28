@@ -66,10 +66,10 @@ sudo install -v ./mininet/mnexec /usr/local/bin/
 ```
 ### Run
 ```bash
-# terminal 1
+# terminal 1 (controller)
 sudo systemctl start openvswitch-switch                       # enable ovs as background service 
 .venv/bin/python3 src/main.py	                              # start the controller app
-# terminal 2
+# terminal 2 (mininet)
 sudo ./.venv/bin/mn --controller remote --mac --topo single,3 # start mininet
 ```
 
@@ -102,14 +102,14 @@ Open `http://localhost:8080/` for the GUI.
 ```bash
 # stopping the project
 
-# terminal 1
-Ctrl+C                                    # to stop the (foreground) process of the server (and the mininet on the other terminal)
-deactivate                                # exit from the python virtual environment
-sudo systemctl stop openvswitch-switch    # stop the background service
-
-# terminal 2
+# terminal 2 (mininet)
 mininet> exit                             # exiting the mininet
 sudo mn -c                                # cleanup of mininet (optional, but may resolve some issues)
+
+# terminal 1 (controller)
+Ctrl+C                                    # to stop the (foreground) process of the server
+deactivate                                # exit from the python virtual environment
+sudo systemctl stop openvswitch-switch    # stop the background service (optional, only if nothing else uses OVS)
 
 # uninstalling the project:	
 cd .. && sudo rm -rf SDN_firewall-DPI
