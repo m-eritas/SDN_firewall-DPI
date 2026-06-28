@@ -103,7 +103,8 @@ Open `http://localhost:8080/` for the GUI.
 # stopping the project
 
 # terminal 2 (mininet)
-mininet> exit                             # exiting the mininet
+mininet>
+exit                                      # exiting the mininet
 sudo mn -c                                # cleanup of mininet (optional, but may resolve some issues)
 
 # terminal 1 (controller)
