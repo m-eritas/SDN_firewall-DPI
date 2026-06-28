@@ -15,6 +15,7 @@ Tested on:
 - **Rate limiting** - configurable packet-per-window threshold per source IP; exceeded sources get a temporary hardware drop rule
 - **ARP spoof detection** - learns legitimate IP→MAC bindings and drops forged ARP replies
 - **TCP scan detection** - identifies XMAS, NULL, SYN+FIN, SYN+RST, and bare FIN scans via flag inspection
+- **Temporal rule lifetimes** - dynamic detections (rate-limit drops, ARP spoof drops, trust flows) install with idle_timeout/hard_timeout and expire automatically; static rules (manual IP/port blocks) persist until explicitly removed via REST.
 - **Deep packet inspection** - regex-based payload matching on TCP streams with 6 built-in signatures (SQL injection, shellcode NOP sled, XSS, path traversal, command injection, FTP cleartext credentials) and support for user-defined patterns via REST
 - **Trust flow installation** - after K clean packets on a 5-tuple, installs a priority-400 hardware forwarding rule so trusted traffic bypasses the controller. Adding a new DPI pattern flushes all trust flows for re-inspection
 - **Web GUI** - dark-themed dashboard with live WebSocket event log, stat counters, and controls for all rule types
@@ -103,6 +104,7 @@ Open `http://localhost:8080/` for the GUI.
 - **No authentication on the REST API.** Anyone who can reach port 8080 can modify firewall rules. Acceptable for a lab environment, not for production.
 - **Source-only IP blocking.** The `blocked_ips` rule checks `ip_src` only. Bidirectional protocols like ICMP ping appear fully blocked because the reply (sourced from the blocked IP) is dropped.
 - **ReDoS heuristic is not exhaustive.** User-submitted DPI patterns are checked against a regex blocklist for common backtracking constructs, but adversarial patterns like `(a|a)+b` can still slip through.
+- **Static IP/port blocks do not expire.** Unlike rate-limit, ARP-spoof, and trust-flow rules, manually blocked IPs and ports persist until removed via DELETE. This is intentional - we believe an administrator's explicit block shouldn't silently lapse.
 
 ### Uninstall
 ```bash
