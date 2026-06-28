@@ -354,7 +354,12 @@ class FirewallApp(app_manager.RyuApp):
 
     def icmp_packet_handler(self, msg, icmp_pkt) -> CheckResult:
         """
-            TODO: GOON HERE @.@
+            No ICMP-specific inspection is performed here by design.
+            IP-level checks (static block, allowlist, rate limit) already run upstream in ipv4_packet_handler before this is reached,
+            so volumetric and source-blocking protection already applies to ICMP traffic.
+            
+            Placeholder for future protocol-specific checks (e.g. ping-sweep detection by tracking distinct destinations per source, or anomalous type/code values).
+            (Not implemented in this version)
         """
         # icmp packet:
         # {
