@@ -9,10 +9,11 @@
 
 set -e
 
-SCRIPT_DIR="$(cd "$(dirname "$0")/../../.." && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
 cd "$SCRIPT_DIR"
 
 echo "[restart] Stopping mininet..."
+sudo pkill -f "mn --controller" 2>/dev/null || true
 sudo mn -c 2>/dev/null || true
 
 echo "[restart] Killing any running controller..."
@@ -46,5 +47,3 @@ echo "    cd $SCRIPT_DIR"
 echo "    source ./.venv/bin/activate"
 echo "    sudo ./.venv/bin/mn --controller remote --mac --topo single,3"
 echo ""
-echo "[restart] To stop everything later:"
-echo "    sudo mn -c && kill $CTRL_PID"
