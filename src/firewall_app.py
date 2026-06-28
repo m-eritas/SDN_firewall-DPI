@@ -724,6 +724,7 @@ class FirewallApp(app_manager.RyuApp):
                         log_proto = f'{ip_pkt.proto}'
             self._apply_result(result, src=log_src, dst=log_dst, proto=log_proto, port=log_port)
         else:                                                                                             # routing for allowed packets
+            self.stats['allowed'] += 1
             if eth_dst in self.mac_to_port[dpid]:
                 out_port = self.mac_to_port[dpid][eth_dst]
             else:
