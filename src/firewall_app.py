@@ -250,6 +250,13 @@ class FirewallApp(app_manager.RyuApp):
         """
 
         for datapath in self.datapaths.values():
+            """
+            Non-strict delete on eth_type=0x0800 removes every IPv4 flow whose match is a subset of this one: 
+                p300 (reinstalled below);
+                p400 trust flows (the actual target);
+                p200 rate-limit drop flows;
+            p0 table-miss rule (fully wildcarded) is not a subset, so it survives untouched.
+            """
             ofproto = datapath.ofproto
             parser = datapath.ofproto_parser
 
